@@ -1,9 +1,16 @@
 #!/usr/bin/python3
 import random
-number = random.randint(-10, 10)
-if number > 0:
-    print("{0:d} is positive".format(number))
-elif number == 0:
-    print("{0:d} is zero".format(number))
+number = random.randint(-10000, 10000)
+if number >= 0:
+    last_digitnum = number % 10
 else:
-    print("{0:d} is negative".format(number))
+    last_digitnum = ((-number % 10) * -1)
+
+    message = f"Last digit of {number} is {last_digit}"
+
+if last_digitnum == 0:
+    print(f"{message} and is 0")
+elif last_digitnum > 5 and last_digitnum % 10 != 0:
+    print(f"{message} and is greater than 5")
+else:
+    print(f"{message} and is less than 6 and not 0")
