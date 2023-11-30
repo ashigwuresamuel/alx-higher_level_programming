@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-number_dig = 0
-while number_dig <= 89:
-    if number_dig % 10 == 0:
-        number_dig += 1 + number_dig // 10
-    print("{:02d}".format(number_dig), end='\n' if number_dig == 89 else ", ")
-    number_dig += 11
+number = 0
+while number <= 89:
+    if number % 10 == 0:
+        number += 1 + number // 10
+    print("{:02d}".format(number), end='\n' if number == 89 else ", ")
+    number += 1
