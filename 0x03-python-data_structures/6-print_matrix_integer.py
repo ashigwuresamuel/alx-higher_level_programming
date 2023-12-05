@@ -5,7 +5,7 @@ def print_matrix_integer(matrix=[[]]):
 
     for row in matrix:
         num_elements = len(row)
-        col = 0  #keeps track of the column index
+        col = 0  # keeps track of the column index
 
         for x in row:
             if col < num_elements - 1:
