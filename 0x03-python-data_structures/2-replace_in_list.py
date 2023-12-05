@@ -2,7 +2,7 @@
 
 def replace_in_list(my_list, idx, element):
     # handle the case where the index (idx) is negative
-    #if negative return original lists.
+    # if negative return original lists.
     # check if the index is greater than or equal to the number of elements
     if idx < 0 or idx >= len(my_list):
         return my_list
