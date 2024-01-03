@@ -1,85 +1,112 @@
-# Setup: Import the module and function
->>> mod = __import__("0-add_integer")
->>> add_integer = mod.add_integer
+The ``0-add_integer`` module
+============================
 
-# Function Documentation
->>> len(mod.__doc__) > 1
-True
+Using ``add_integer``
+---------------------
 
-# Function Documentation
->>> len(add_integer.__doc__) > 1
-True
+Import function from module:
 
-# Test Cases
+    >>> add_integer = __import__('0-add_integer').add_integer
 
-# Adding two positive integers:
->>> add_integer(5, 7)
-12
+Test one int argument:
 
-# Adding two float numbers: (Failed, expected 22 and 5 respectively)
->>> add_integer(15.8, 7.2)
-23
->>> add_integer(2.5, 3.5)
-6
+    >>> add_integer(2)
+    100
 
-# Adding an integer and a float:
->>> add_integer(10, 5.6)
-15
+Test one int argument and check default second:
 
-# Adding a negative and positive number
->>> add_integer(-2, 3)
-1
->>> add_integer(3, -2)
-1
+    >>> add_integer(0)
+    98
 
-# Adding two positive floats
->>> add_integer(96.2, 2.9)
-98
+Test one float:
 
-# Adding one float and one negative float
->>> add_integer(100.1, -2.9)
-98
->>> add_integer(-2.9, 100.1)
-98
+    >>> add_integer(123.9)
+    221
 
-# Adding two negative floats
->>> add_integer(-2.9, -96.2)
--98
+Test one negative float:
 
-# One positive float, one positive integer
->>> add_integer(10.9, 2)
-12
+    >>> add_integer(-95.5)
+    3
 
-# Default b values:
->>> add_integer(10)
-108
->>> add_integer(7.2)
-105
->>> add_integer(0, 0)
-0
+Test two integers:
 
-# Test cases to check for TypeErrors
->>> add_integer(5, "7")
-Traceback (most recent call last):
+    >>> add_integer(10, 5)
+    15
+
+Test two big integers:
+
+    >>> add_integer(999999998, 999999999)
+    1999999997
+
+Test positive, negative integers:
+
+    >>> add_integer(34263478, -89234582395)
+    -89200318917
+
+Test negative, positive integers:
+
+    >>> add_integer(-13947692, 57234)
+    -13890458
+
+Test an integer and a float:
+
+    >>> add_integer(123, 7.987)
+    130
+
+Test a float and an integer:
+
+    >>> add_integer(234234.43545, 4352345)
+    4586579
+
+Test two floats:
+
+    >>> add_integer(0.9, 0.9)
+    0
+
+Add infinity:
+
+    >>> add_integer(float('inf'), float('-inf'))
+    Traceback (most recent call last):
     ...
-TypeError: b must be an integer
+    OverflowError: cannot convert float infinity to integer
 
-# Adding list and integer
->>> add_integer([1, 2], 7)
-Traceback (most recent call last):
+Add nan:
+
+    >>> add_integer(0, float('nan'))
+    Traceback (most recent call last):
     ...
-TypeError: a must be an integer
+    ValueError: cannot convert float NaN to integer
 
->>> add_integer(5, [1, 2])
-Traceback (most recent call last):
+Test first arg invalid:
+
+    >>> add_integer("foo", 0)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+Test second arg invalid:
+
+    >>> add_integer(123123, [])
+    Traceback (most recent call last):
+        ...
+    TypeError: b must be an integer
+
+Test both args invalid:
+
+    >>> add_integer(None, None)
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+Test two strings:
+
+    >>> add_integer("foo", "bar")
+    Traceback (most recent call last):
+        ...
+    TypeError: a must be an integer
+
+Test float overflow:
+    >>> add_integer(float('inf'), 0)
+    Traceback (most recent call last):
     ...
-TypeError: b must be an integer
-
-# Test special float NaN in Python (not a number):
->>> print(add_integer(float("NaN")))
-Traceback (most recent call last):
-    ...
-ValueError: cannot convert float NaN to integer
-
-
-# run test case file with `python3 -m doctest -v ./tests/0-add_integer.txt`
+    OverflowError: cannot convert float infinity to integer`
