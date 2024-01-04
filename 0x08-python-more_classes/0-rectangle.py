@@ -2,4 +2,3 @@
 
 #Class that defines a rectangle
 class Rectangle:
-    pass
