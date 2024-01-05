@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """Solves the N-queens puzzle.
 
 Determines all possible solutions to placing N
@@ -7,7 +8,7 @@ N non-attacking queens on an NxN chessboard.
 Example:
     $ ./101-nqueens.py N
 
-N must be an intege > or  =  4.
+N must be an integer greater than or equal to 4.
 
 Attributes:
     board (list): A list of lists representing the chessboard.
