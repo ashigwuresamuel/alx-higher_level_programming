@@ -1,14 +1,9 @@
 #!/usr/bin/python3
-
-"""
-lockup object module
-create a function that creates a prototype lookup(obj)
-"""
+'''Module for MyList class.'''
 
 
-def lookup(obj):
-    """
-    Functions that returna list of available attributes
-    and list of an object.
-    """
-    return dir(obj)
+class MyList(list):
+    '''Custom MyList class.'''
+    def print_sorted(self):
+        '''Method for printing sorted list.'''
+        print(sorted(self))
