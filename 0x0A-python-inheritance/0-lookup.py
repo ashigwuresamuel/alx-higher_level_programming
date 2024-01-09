@@ -1,8 +1,10 @@
 #!/usr/bin/python3
+
 """
 lockup object module
 create a function that creates a prototype lookup(obj)
 """
+
 
 def lookup(obj):
     """
