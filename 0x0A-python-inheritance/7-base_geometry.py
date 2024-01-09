@@ -15,7 +15,7 @@ with the message <name> must be greater than 0
 
 class BaseGeometry:
     """
-    A class that defines the geometry
+     class that defines the geometry
     """
     def area(self):
         """
