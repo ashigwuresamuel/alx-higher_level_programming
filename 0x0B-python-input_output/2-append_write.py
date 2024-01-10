@@ -1,24 +1,15 @@
 #!/usr/bin/python3
-
-"""
-A Module that appends a string at the end of a text file(UTF8)
-and return the number of characters added.
-Prototype: def append_write(filename="", text=""):
-If the file doesn’t exist, it should be created
-You must use the with statement
-You don’t need to manage `file permission` or `file doesn't exist` exceptions.
-You are not allowed to import any module
-"""
+"""Defines a file-appending function."""
 
 
 def append_write(filename="", text=""):
-    """
-    Append string to end of text.
+    """Appends a string to the end of a UTF8 text file.
+
     Args:
-        filename
-        text
-    Return: number of characters added.
+        filename (str): The name of the file to append to.
+        text (str): The string to append to the file.
+    Returns:
+        The number of characters appended.
     """
-    with open(filename, 'a', encoding="UTF8") as myfile:
-        content = myfile.write(text)
-        return (content)
+    with open(filename, "a", encoding="utf-8") as f:
+        return f.write(text)
