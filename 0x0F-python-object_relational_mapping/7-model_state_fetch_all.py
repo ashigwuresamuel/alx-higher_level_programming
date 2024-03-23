@@ -1,32 +1,18 @@
 #!/usr/bin/python3
-
+"""Start link class to table in database
 """
-Module that contains the class definition of a State and an instance
-Base = declarative_base():
-Links to the MySQL table `states`
-Class attribute `id` that represents a column of an auto-generated,
-unique integer, can’t be null and is a primary key.
-class attribute `name` that represents a column of a string with maximum
-128 characters and can’t be null.
-Must use the module SQLAlchemy.
-Script should connect to a MySQL server running on localhost at port 3306
-"""
-
-from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
+import sys
+from model_state import Base, State
+from sqlalchemy import (create_engine)
+from sqlalchemy.orm import sessionmaker
 
 
-# Creating an instance of declarative_base
-Base = declarative_base()
+if __name__ == "__main__":
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    for instance in session.query(State).order_by(State.id):
+        print(instance.id, instance.name, sep=": ")
 
-
-class State(Base):
-    """
-    Class representing the states table.
-    Linked to MySQL table "states"
-    """
-    __tablename__ = 'states'
-
-    id = Column(Integer, primary_key=True, nullable=False,
-                autoincrement=True)
-    name = Column(String(128), nullable=False)
