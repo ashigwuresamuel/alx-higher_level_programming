@@ -1,45 +1,20 @@
 #!/usr/bin/python3
-
+""" prints the State object with the name passed as argument from the database
 """
-Script that prints all City objects from the database hbtn_0e_14_usa.
-Parameters for script: mysql username, mysql password, database name.
-Must use the `SQLAlchemy` module.
-Must import `State` and `Base` from `model_state` -
-`from model_state import Base, State`
-Script should connect to a MySQL server runnimg on `localhost` at port `3306`
-Results must be sorted in ascending order by `cities.id`
-Results must be display as they are in the example below -
-(<state name>: (<city id>) <city name>)
-Code should not be executed when imported.
-"""
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+import sys
 from model_state import Base, State
 from model_city import City
-from sys import argv
+from sqlalchemy import (create_engine)
+from sqlalchemy.orm import sessionmaker
+
 
 if __name__ == "__main__":
-    # Check if the number of arguments is correct
-    if len(argv) != 4:
-        print("Usage: {} <username> <password> <database>".format(argv[0]))
-        exit()
-
-    # Creating the connection string
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
-        argv[1], argv[2], argv[3]), pool_pre_ping=True)
-
-    # Creating an instance of Session
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]))
+    Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
+    for instance in (session.query(State.name, City.id, City.name)
+                     .filter(State.id == City.state_id)):
+        print(instance[0] + ": (" + str(instance[1]) + ") " + instance[2])
 
-    # Querying multiple tables in database and printing info from tables
-    cities = session.query(State.name, City.id, City.name).filter(
-        State.id == City.state_id).order_by(City.id)
-
-    # Displaying the results
-    for city in cities:
-        print("{:s}: ({:d}) {:s}".format(city[0], city[1], city[2]))
-
-    # Closing the session
-    session.close()
